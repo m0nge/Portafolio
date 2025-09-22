@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniela Monge - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Partículas de código flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            color: #64748b;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+            user-select: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #3b82f6, #06b6d4, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .hero h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Secciones */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #3b82f6, #06b6d4);
+            border-radius: 2px;
+        }
+
+        /* Proyectos Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .project-card:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: #3b82f6;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #3b82f6;
+        }
+
+        .project-card h3 {
+            font-family: 'Orbitron', monospace;
+            color: #f1f5f9;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .github-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #1e293b, #334155);
+            color: #e2e8f0;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .github-link:hover {
+            background: linear-gradient(45deg, #3b82f6, #06b6d4);
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .skill-category h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #06b6d4;
+            font-weight: 700;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            animation: pulse 3s infinite;
+        }
+
+        .skill-tag:nth-child(even) {
+            animation-delay: 1s;
+        }
+
+        .skill-tag:nth-child(3n) {
+            animation-delay: 2s;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-color: #3b82f6;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.2rem; }
+            .section h2 { font-size: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Elementos animados al scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efectos adicionales */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+            to { text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de código -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="glow">Daniela Monge</h1>
+            <h2>Ingeniería en Desarrollo de Software</h2>
+            <p>
+                Soy una apasionada desarrolladora de software que encuentra en la programación una forma 
+                de crear soluciones innovadoras y transformar ideas en realidad. Me encanta explorar 
+                nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
+            </p>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="fade-in">Mis Proyectos</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Proyecto 1</h3>
+                    <p>Aplicación web desarrollada con React y Node.js para gestión de tareas</p>
+                    <a href="https://github.com" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver en GitHub
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Proyecto 2</h3>
+                    <p>Aplicación móvil responsive con diseño moderno y funcionalidades avanzadas</p>
+                    <a href="https://github.com" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver en GitHub
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Proyecto 3</h3>
+                    <p>Sitio web completo con backend en PHP y base de datos MySQL</p>
+                    <a href="https://github.com" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver en GitHub
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Proyecto 4</h3>
+                    <p>Sistema de análisis de datos con Python y visualizaciones interactivas</p>
+                    <a href="https://github.com" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver en GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="fade-in">Skills & Herramientas</h2>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3>Lenguajes</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3>Herramientas</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Terminal</span>
+                        <span class="skill-tag">VSCode</span>
+                        <span class="skill-tag">NPM</span>
+                        <span class="skill-tag">WordPress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fragmentos de código para las partículas
+        const codeFragments = [
+            'function()', 'const', 'let', 'var', 'if', 'else', 'for', 'while', 
+            '{}', '[]', '()', '=>', '===', '!==', '&&', '||', 'true', 'false',
+            'return', 'class', 'import', 'export', 'async', 'await', 'try', 'catch',
+            'console.log', 'document', 'window', 'Array', 'Object', 'String',
+            '<div>', '</div>', '<p>', '</p>', 'margin:', 'padding:', 'color:',
+            'SELECT', 'FROM', 'WHERE', 'JOIN', 'INSERT', 'UPDATE', 'DELETE',
+            'def', 'print', 'len', 'range', 'list', 'dict', 'tuple',
+            'npm', 'git', 'commit', 'push', 'pull', 'merge', 'branch'
+        ];
+
+        // Crear partículas de código
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = codeFragments[Math.floor(Math.random() * codeFragments.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Indicador de progreso de scroll
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+        }
+
+        // Animaciones al scroll
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Efecto parallax en el hero
+        function setupParallax() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-content');
+                const rate = scrolled * -0.3;
+                hero.style.transform = `translateY(${rate}px)`;
+            });
+        }
+
+        // Efecto hover mejorado en cards
+        function setupProjectCards() {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.03) rotateY(3deg)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1) rotateY(0deg)';
+                });
+            });
+        }
+
+        // Inicializar todo
+        function init() {
+            createParticles();
+            setupScrollAnimations();
+            setupParallax();
+            setupProjectCards();
+
+            window.addEventListener('scroll', updateScrollIndicator);
+        }
+
+        // Ejecutar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Cursor personalizado mejorado
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 25px;
+                    height: 25px;
+                    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 10000;
+                    mix-blend-mode: screen;
+                    transition: transform 0.15s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const actualCursor = document.querySelector('.cursor');
+            actualCursor.style.left = e.clientX - 12.5 + 'px';
+            actualCursor.style.top = e.clientY - 12.5 + 'px';
+        });
+    </script>
+</body>
+</html>
