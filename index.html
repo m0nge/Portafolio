@@ -37,10 +37,10 @@
             color: #00ff41;
             font-family: 'Orbitron', monospace;
             font-size: 16px;
-            opacity: 0.35; /* Punto medio entre 0.15 y 0.60 */
+            opacity: 0.35;
             animation: matrixRain 12s infinite linear;
             user-select: none;
-            text-shadow: 0 0 3px #00ff41; /* Un poco más de brillo */
+            text-shadow: 0 0 3px #00ff41;
         }
 
         @keyframes matrixRain {
@@ -49,10 +49,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.45; /* Punto medio para la animación */
+                opacity: 0.45;
             }
             90% {
-                opacity: 0.45; /* Punto medio para la animación */
+                opacity: 0.45;
             }
             100% {
                 transform: translateY(100vh);
@@ -113,77 +113,6 @@
             height: 100%;
             object-fit: cover;
             filter: brightness(1.1) contrast(1.1);
-        }
-
-        /* Avatar 3D Container */
-        .avatar-3d-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        #avatar3d {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .avatar-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #00ff41;
-            font-size: 1rem;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(0, 255, 65, 0.3);
-            border-top: 3px solid #00ff41;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Efectos para el avatar 3D */
-        .avatar-3d-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(0, 255, 65, 0.1) 50%, 
-                transparent 70%);
-            border-radius: 50%;
-            z-index: 5;
-            pointer-events: none;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { 
-                transform: rotate(0deg);
-                opacity: 0.3;
-            }
-            50% { 
-                transform: rotate(180deg);
-                opacity: 0.8;
-            }
         }
 
         @keyframes profileGlow {
@@ -337,7 +266,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
-            max-width: 800px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -388,9 +317,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            color: #00ff41;
-            text-shadow: 0 0 20px #00ff41;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
         }
 
         .project-card h3 {
@@ -405,9 +344,16 @@
             color: #90EE90;
             margin-bottom: 1.5rem;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        .github-link {
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .github-link, .demo-link {
             display: inline-block;
             padding: 0.8rem 1.5rem;
             background: linear-gradient(45deg, #001100, #002200);
@@ -418,9 +364,15 @@
             transition: all 0.3s ease;
             font-weight: 600;
             text-shadow: 0 0 5px #00ff41;
+            font-size: 0.9rem;
         }
 
-        .github-link:hover {
+        .demo-link {
+            background: linear-gradient(45deg, #002200, #003300);
+            border-color: rgba(57, 255, 20, 0.5);
+        }
+
+        .github-link:hover, .demo-link:hover {
             background: linear-gradient(45deg, #00ff41, #39ff14);
             color: #000000;
             border-color: #00ff41;
@@ -435,7 +387,7 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
         }
 
-        /* Skills Grid - CENTRADO MEJORADO */
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -454,7 +406,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 255, 65, 0.05);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra horizontalmente */
+            align-items: center;
         }
 
         .skill-category h3 {
@@ -464,14 +416,14 @@
             color: #39ff14;
             font-weight: 700;
             text-shadow: 0 0 15px #39ff14;
-            text-align: center; /* Centra el título */
+            text-align: center;
         }
 
         .skills-list {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            justify-content: center; /* Centra todas las tags */
+            justify-content: center;
             align-items: center;
             width: 100%;
         }
@@ -487,11 +439,11 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centra el contenido dentro de cada tag */
+            justify-content: center;
             gap: 0.5rem;
             animation: matrixPulse 4s infinite;
             text-shadow: 0 0 5px #00ff41;
-            text-align: center; /* Centra el texto */
+            text-align: center;
         }
 
         .skill-tag:nth-child(even) {
@@ -539,6 +491,7 @@
             .projects-grid { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: 1fr; }
             .profile-photo { width: 150px; height: 150px; }
+            .project-links { flex-direction: column; }
         }
 
         /* Elementos animados al scroll */
@@ -615,7 +568,6 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="profile-photo">
-                <!-- Tu avatar de Ready Player Me -->
                 <img src="https://models.readyplayer.me/68d2034fc9891f037b14d814.png" alt="Daniela Monge Avatar">
             </div>
             <h1>Daniela Monge</h1>
@@ -629,7 +581,7 @@
                 <a href="https://linkedin.com" target="_blank">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com" target="_blank">
+                <a href="https://github.com/m0nge" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
@@ -643,46 +595,66 @@
             <div class="projects-grid">
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <i class="fas fa-laptop-code"></i>
+                        <img src="https://i.postimg.cc/7YYD9gzj/imagen-2025-10-06-134857901.png" alt="BailaBits">
                     </div>
-                    <h3>Proyecto 1</h3>
-                    <p>Aplicación web desarrollada con React y Node.js para gestión de tareas</p>
-                    <a href="https://github.com" target="_blank" class="github-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
-                    </a>
+                    <h3>BailaBits</h3>
+                    <p>Visualizador de música 3D que descompone audio en frecuencias usando Web Audio API y anima figuras geométricas en tiempo real con Three.js. Las formas responden dinámicamente a los bajos y frecuencias, renderizando a 60 FPS mediante WebGL.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/m0nge/BailaBits" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://m0nge.github.io/BailaBits/" target="_blank" class="demo-link">
+                            <i class="fas fa-eye"></i> Ver Demo
+                        </a>
+                    </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <i class="fas fa-mobile-alt"></i>
+                        <img src="https://i.postimg.cc/N0LkkPGf/imagen-2025-10-06-135313186.png" alt="Pixito">
                     </div>
-                    <h3>Proyecto 2</h3>
-                    <p>Aplicación móvil responsive con diseño moderno y funcionalidades avanzadas</p>
-                    <a href="https://github.com" target="_blank" class="github-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
-                    </a>
+                    <h3>Pixito</h3>
+                    <p>Editor de fotos 3D en navegador con transformaciones en tiempo real. Permite rotar imágenes en espacio 3D, ajustar brillo, contraste, saturación, aplicar filtros vintage y exportar resultados. Construido con JavaScript puro y Canvas API.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/m0nge/Pixito" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://m0nge.github.io/Pixito/" target="_blank" class="demo-link">
+                            <i class="fas fa-eye"></i> Ver Demo
+                        </a>
+                    </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <i class="fas fa-globe"></i>
+                        <img src="https://i.postimg.cc/sDvfyY26/imagen-2025-10-06-135540864.png" alt="X0">
                     </div>
-                    <h3>Proyecto 3</h3>
-                    <p>Sitio web completo con backend en PHP y base de datos MySQL</p>
-                    <a href="https://github.com" target="_blank" class="github-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
-                    </a>
+                    <h3>X0 (Tic-Tac-Toe)</h3>
+                    <p>Juego clásico de tres en raya desarrollado con JavaScript vanilla, HTML5 y CSS3. Interfaz limpia y responsive con detección inteligente de ganador, sistema de turnos y animaciones suaves para una experiencia de usuario fluida.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/m0nge/XO" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://m0nge.github.io/XO/" target="_blank" class="demo-link">
+                            <i class="fas fa-eye"></i> Ver Demo
+                        </a>
+                    </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <i class="fas fa-database"></i>
+                        <img src="https://i.postimg.cc/wv1HHHqt/imagen-2025-10-06-135746221.png" alt="SparkVerse">
                     </div>
-                    <h3>Proyecto 4</h3>
-                    <p>Sistema de análisis de datos con Python y visualizaciones interactivas</p>
-                    <a href="https://github.com" target="_blank" class="github-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
-                    </a>
+                    <h3>SparkVerse</h3>
+                    <p>Generador de arte digital interactivo con sistema de partículas físicas. Modo dibujo para crear arte permanente y modo animación con efectos de gravedad, espirales y explosiones. Miles de partículas a 60 FPS con física vectorial real.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/m0nge/Sparkverse" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://m0nge.github.io/Sparkverse/" target="_blank" class="demo-link">
+                            <i class="fas fa-eye"></i> Ver Demo
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
